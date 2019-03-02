@@ -1,4 +1,4 @@
-# linkedin_scraper
+# Simple Linkedin Scraper
 Simple python script for scraping Linkedin users' jobs.
 
 ## Usage
