@@ -5,9 +5,11 @@ import csv
 from bs4 import BeautifulSoup
 
 #Open browser and linkedin
+
+#Number of profiles to scrape 
 people = int(input())
 
-
+#Open browser
 driver = webdriver.Safari()
 driver.get('http://www.linkedin.com')
 
@@ -35,9 +37,11 @@ login()
     #Extract jobs and save to csv
     #Find next link, Go to next page, and repeat step 2
 
+#Link of first profile
+starting_link = ''
 
-driver.get('https://www.linkedin.com/in/ann-cheung-902a21132/')
-visited_links = ['/in/ann-cheung-902a21132/']
+driver.get('https://www.linkedin.com' + starting_link)
+visited_links = [starting_link]
 sleep(2)
 
 csvfile = open('Jobs.csv', 'a')
@@ -46,8 +50,10 @@ writer.writerow([])
 writer.writerow(('name', 'Job 1', 'Job 2', 'Job 3', 'Job 4', 'Job 5', 'Job 6'))
 
 def proceed_to_next(html):
-    #find and open the first recommended person link
-    #Make sure the same person isn't visited twice.
+    '''
+    find and open the first recommended person link
+    Make sure the same person isn't visited twice.
+    '''
     try:
         for x in range(0,5):
             nextlink = html.find_all('a', class_ = 'pv-browsemap-section__member ember-view')[x].attrs['href']
@@ -71,6 +77,11 @@ def proceed_to_next(html):
                 break
 
 def extract_jobs():
+    '''
+    Extracts the job history of the current user profile
+    Writes the jobs to a csv file 
+    Saves link of the user to avoid effort duplication 
+    '''
     sleep(4)
     driver.execute_script("window.scrollTo(150, 650)")
     sleep(3)
@@ -104,10 +115,11 @@ def snoopdogg(x):
         extract_jobs()
     csvfile.close()
 
+#Run Function 
 snoopdogg(people)
 
 
-#Bug Fixes
+#Pending Fixes
     #Jobs where there is a missing location or job title
     #How to deal with column only appearing once.
     #explicit waits
