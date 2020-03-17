@@ -1,5 +1,5 @@
 # Simple Linkedin Scraper
-Simple Python 3 script for scraping Linkedin users' jobs.
+Simple Python 3 script for scraping the jobs off LinkedIn profiles.
 
 ## Usage
 - Change the 'username' and 'password' fields in the python script. 
